@@ -2,7 +2,7 @@ const express = require('express');
 const morgan = require('morgan');
 const helmet = require('helmet');
 const compression = require('compression');
-
+const SECOND = 5000;
 const app = express();
 
 console.log('hello');
@@ -13,6 +13,13 @@ app.use(helmet());
 app.use(compression());
 
 // init db
+// require('./dbs/init.mongodb.lv0');
+require('./dbs/init.mongodb');
+
+const { countConnect, checkOverload } = require('./helpers/check.connect');
+
+countConnect();
+const interval = setInterval(checkOverload, SECOND);
 
 // init router
 
@@ -27,4 +34,7 @@ app.get('/', (req, res) => {
 	});
 });
 
-module.exports = app;
+module.exports = {
+	app,
+	interval,
+};

@@ -1,5 +1,6 @@
 const dotenv = require('dotenv');
-const app = require('./src/app');
+const { app, interval } = require('./src/app');
+const { checkOverload } = require('./src/helpers/check.connect');
 
 dotenv.config();
 
@@ -11,5 +12,9 @@ const server = app.listen(PORT, () => {
 
 // todo why?
 process.on('SIGINT', () => {
-	server.close(() => console.log('Server Express Exited'));
+	server.close(() => {
+		// exit the process
+		clearInterval(interval);
+		console.log('Server Express Exited');
+	});
 });
