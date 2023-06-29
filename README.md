@@ -1,4 +1,7 @@
 -   [Utils vs helper](https://www.baeldung.com/java-helper-vs-utility-classes)
+-   [Let It Crash: Best Practices for Handling Node.js Errors on Shutdown](https://blog.heroku.com/best-practices-nodejs-errors)
+    [How to stop NodeJS server process](https://sebhastian.com/how-to-stop-node-server/)
+-   [Set-up node config](https://codingsans.com/blog/node-config-best-practices)
 
 ## Init
 

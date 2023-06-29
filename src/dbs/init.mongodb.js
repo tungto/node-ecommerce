@@ -1,8 +1,10 @@
 'use strict';
 
 const mongoose = require('mongoose');
+const config = require('../configs/config.mongodb');
 
-const connectString = `mongodb://localhost:27017/shopDEV`;
+//"mongodb://localhost:27017/shopDEV"
+const connectString = `mongodb://${config.db.host}:${config.db.port}/${config.db.name}`;
 
 // using singleton pattern to create only one connection
 class Database {
@@ -15,10 +17,12 @@ class Database {
 			mongoose.set('debug', true);
 			mongoose.set('debug', { color: true });
 		}
+
+		console.log(connectString);
 		mongoose
 			.connect(connectString)
 			.then(() => {
-				console.log('Connected Mongodb Success - Lvx');
+				console.log(`Connected Mongodb ${connectString} Success - Lvx`);
 			})
 			.catch((err) => {
 				console.log('Error connect!');
