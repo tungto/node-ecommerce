@@ -1,6 +1,6 @@
 const dotenv = require('dotenv');
-const { app, interval } = require('./src/app');
-const { checkOverload } = require('./src/helpers/check.connect');
+const { app } = require('./src/app');
+const mongoose = require('mongoose');
 
 dotenv.config();
 
@@ -14,7 +14,8 @@ const server = app.listen(PORT, () => {
 process.on('SIGINT', () => {
 	server.close(() => {
 		// exit the process
-		clearInterval(interval);
+		// clearInterval(interval);
+		mongoose.disconnect();
 		console.log('Server Express Exited');
 	});
 });

@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 const config = require('../configs/config.mongodb');
 
 //"mongodb://localhost:27017/shopDEV"
-const connectString = `mongodb://${config.db.host}:${config.db.port}/${config.db.name}`;
+const connectString = `mongodb://0.0.0.0:${config.db.port}/${config.db.name}`;
 
 // using singleton pattern to create only one connection
 class Database {
@@ -25,7 +25,7 @@ class Database {
 				console.log(`Connected Mongodb ${connectString} Success - Lvx`);
 			})
 			.catch((err) => {
-				console.log('Error connect!');
+				console.log('Error connect!', err);
 			});
 	}
 
@@ -39,5 +39,7 @@ class Database {
 }
 
 const instanceMongodb = Database.getInstance();
+
+console.log(mongoose.connection.readyState);
 
 module.exports = instanceMongodb;
